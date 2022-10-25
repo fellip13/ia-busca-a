@@ -1,3 +1,11 @@
+"""
+Integrantes do grupo da atividade prática:
+Fellip da Silva Ribeiro                - RA: 11201921507
+Thales Cunha de Paixão                 - RA: 11201920276
+Paulo Henrique Guilherme Coutinho      - RA: 11201811010
+"""
+
+
 class TreeNode:
     def __init__(self, puzzle, cost, order="N/A"):
         self.puzzle = puzzle
@@ -124,14 +132,25 @@ def solve_puzzle(node, root, previous):
         solve_puzzle(next_node, root, previous)
 
 
+def generate_puzzle():
+    return [[int(number) for number in input(f'Digite a {times}º linha do puzzle separado por vírgula (três valores): ') \
+        .split(',')] for times in [1,2,3]]
+
 def main():
-    puzzle = [[3,2,4], [1,0,6], [7,5,8]]
+    puzzle = generate_puzzle()
+    print(puzzle)
     cost_puzzle = cost(puzzle)
     root = TreeNode(puzzle=puzzle, cost=cost_puzzle)
     solve_puzzle(node=root, root=root, previous=0)
-    print("\nÁrvore expandida: ")
-    print("|-- Puzzle configuration --- Cost --- Depth --- Expansion Order\n")
+    print("\nÁrvore expandida: \n")
     root.print_tree()
+    print("\nEstrutura da árvore expandida acima: ")
+    print("|-- Puzzle configuration --- Cost --- Depth --- Expansion Order")
+    print("""    |-- Filho
+        |-- neto
+        |-- neto
+    |-- Filho
+    |-- Filho""")
     print("\nNós criados (incluindo o nó raiz): ", root.count_nodes(0))
     print("Nós expandidos (incluindo o nó raiz): ", root.expanded_nodes(0))
 
